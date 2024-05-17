@@ -1,0 +1,68 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Bootstrap demo</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet"
+	integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
+	crossorigin="anonymous">
+</head>
+<body>
+
+	<div class="container p-1 my-1 border">
+		<div class="card">
+			<div class="card-header bg-info text-black">
+				<h2>Registration Form</h2>
+			</div>
+			<div class="card-body">
+				<form th:action="@{/save}" method="POST" th:object="${captc}">
+					<input type="hidden" th:field="*{id}" />
+					<!-- Username -->
+					<div class="mb-3">
+						<label for="username" class="form-label">Username</label> <input
+							type="text" class="form-control" id="name" th:field="*{name}"
+							required/>
+					</div>
+
+					<!-- Email -->
+					<div class="mb-3">
+						<label for="email" class="form-label">Email</label> <input
+							type="email" class="form-control" id="email" th:field="*{email}"
+							required/>
+					</div>
+
+					<!-- Captcha -->
+					<lable>CAPTCHA</lable>
+					<div class="mb-3">
+						<!-- Include your captcha implementation here -->
+						<img th:src="*{'data:realCaptcha/jpg;base64,'+ realCaptcha}">
+					</div>
+					<label>ENTER CAPTCHA</label>
+					<div class="mb-3">
+						<!-- Include your captcha implementation here -->
+						<input type="hidden" th:field="*{hiddenCaptcha}" /> <input
+							type="text" class="form-control" th:field="*{captcha}" />
+					</div>
+
+
+					<div class="mb-3">
+						<!-- Submit button -->
+						<input type="submit" value="Register" class="btn btn-primary">
+					</div>
+				</form>
+			</div>
+
+			<div th:if="${message!=null}" class="card-footer bg-info text-white">
+				<span class="alert alert-danger" th:text="${message}"></span>
+			</div>
+		</div>
+	</div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
+		integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
+		crossorigin="anonymous"></script>
+</body>
+</html>
